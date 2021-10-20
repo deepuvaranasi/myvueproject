@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewpoint" content="width=device-width" ,initial-scale="1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- jquery for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+
+    <!-- font awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Vue.js script source -->
+    <!--    <script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+      <title>MyTodoApp</title>
+</head>
+<body>
+<div class="container">
+    <div id="app">
+        <h2 class="text-center">My Vue Todo App</h2>
+        <! Input >
+        <div class="col-sm-8">
+            <input v-model="task" type="text" placeholder="Enter Task" class="form-control">
+        </div>
+        <div class="col-sm-4">
+            <button @click="submitTask" class="btn btn-warning rounded-0">Submit</button>
+        </div>
+        <! Task Table>
+
+        <div class= >
+        <table class="table table-bordered ">
+            <thead>
+            <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="text-center">Edit</th>
+                <th scope="col" class="text-center">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(task,index) in tasks" :key="index">
+                <td><span :class="{'finished':task.status==='finished'}">{{task.name}}</span></td>
+                <td>
+                <span @click="changeStatus(index)" class="pointer"
+                      :class="{ 'text-danger': task.status==='to-do',
+                          'text-warning': task.status==='in-progress',
+                          'text-success': task.status==='finished',}">
+                    {{firstCharUpper(task.status)}}
+            </span>
+                </td>
+                <td>
+                    <div class="text-center" @click="editTask(index)"><span class="fa fa-pencil"></span></div>
+                </td>
+                <td>
+                    <div class="text-center" @click="deleteTask(index)"><span class="fa fa-trash"></span></div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+<script src="js/main1.js"></script>
+<style>
+    .pointer {
+        cursor: pointer;
+    }
+    .finished{
+        text-decoration: line-through;
+    }
+    .table {
+        margin-top: 10px;
+    }
+
+</style>
+
+</body>
+</html>
